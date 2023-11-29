@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProfileRequest extends FormRequest
 {
@@ -23,7 +24,15 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'nullable|string|max:5'
+            'first_name' => ['required', 'string', 'max:10'],
+            'last_name' => ['required', 'string', 'max:10'],
+            "phone_number" => ['nullable', 'string'],
+            'website' => ['nullable', 'url'],
+            'dob' => ['nullable', 'date', 'before:today'],
+            'gender' => ['required', Rule::in(['male', 'female'])],
+            'city' => ['required', 'string'],
+            'country' => ['required', 'string'],
+            'about_me' => ['nullable', 'string']
         ];
     }
 }
