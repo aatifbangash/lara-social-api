@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\RaiseException;
+use App\Http\Requests\ProfileRequest;
 use App\Http\Resources\ProfileResource;
 use App\Http\Resources\UserResource;
 use App\Models\Profile;
@@ -52,6 +53,23 @@ class UsersController extends Controller
                 message: "User ($userId) profile not found",
                 status: Response::HTTP_NOT_FOUND
             );
+
+        return ProfileResource::make($userProfile);
+    }
+
+    /**
+     * @throws RaiseException
+     */
+    public function updateUserProfile(ProfileRequest $request, int $userId): mixed
+    {
+
+        if (!$userProfile = Profile::whereUserId($userId)->first())
+            throw new RaiseException(
+                message: "User ($userId) profile not found",
+                status: Response::HTTP_NOT_FOUND
+            );
+
+        $userProfile->update($request->all());
 
         return ProfileResource::make($userProfile);
     }

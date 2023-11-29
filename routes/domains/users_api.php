@@ -7,4 +7,5 @@ Route::group(['prefix' => '/users'], function () {
     Route::get('/', [UsersController::class, 'getUsers'])->name('get-users');
     Route::get('/{userId}', [UsersController::class, 'getUser'])->name('get-user');
     Route::get('/{userId}/profile', [UsersController::class, 'getUserProfile'])->name('get-user-profile');
+    Route::put('/{userId}/profile', [UsersController::class, 'updateUserProfile'])->name('update-user-profile');
 });
