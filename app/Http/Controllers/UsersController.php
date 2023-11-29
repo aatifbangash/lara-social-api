@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\RaiseException;
+use App\Http\Resources\ProfileResource;
 use App\Http\Resources\UserResource;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -15,9 +17,9 @@ class UsersController extends Controller
     /**
      * @throws RaiseException
      */
-    public function users(): AnonymousResourceCollection
+    public function getUsers(): mixed
     {
-        if (!$users = User::all())
+        if (!$users = User::with('profile')->get())
             throw new RaiseException(
                 message: 'Users are not found',
                 status: Response::HTTP_NOT_FOUND
@@ -29,14 +31,28 @@ class UsersController extends Controller
     /**
      * @throws RaiseException
      */
-    public function user(int $userId): UserResource
+    public function getUser(int $userId): mixed
     {
-        if (!$user = User::find($userId))
+        if (!$user = User::with('profile')->find($userId))
             throw new RaiseException(
                 message: "User ($userId) not found",
                 status: Response::HTTP_NOT_FOUND
             );
 
         return UserResource::make($user);
+    }
+
+    /**
+     * @throws RaiseException
+     */
+    public function getUserProfile(int $userId): mixed
+    {
+        if (!$userProfile = Profile::whereUserId($userId)->first())
+            throw new RaiseException(
+                message: "User ($userId) profile not found",
+                status: Response::HTTP_NOT_FOUND
+            );
+
+        return ProfileResource::make($userProfile);
     }
 }

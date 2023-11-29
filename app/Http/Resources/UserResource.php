@@ -15,11 +15,12 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updated_at->format('Y-m-d H:i:s')
+            'id' => $this->whenNotNull($this->id),
+            'name' => $this->whenNotNull($this->name),
+            'email' => $this->whenNotNull($this->email),
+            'created_at' => $this->whenNotNull($this->created_at->format('Y-m-d H:i:s')),
+            'updated_at' => $this->whenNotNull($this->updated_at->format('Y-m-d H:i:s')),
+            'profile' => $this->whenLoaded('profile', fn() => ProfileResource::make($this->profile))
         ];
     }
 }
