@@ -35,4 +35,12 @@ class ProfileRequest extends FormRequest
             'about_me' => ['nullable', 'string']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'first_name.required' => 'First name is required',
+            'first_name.max' => 'First name must not be more than 10 characters',
+        ];
+    }
 }
