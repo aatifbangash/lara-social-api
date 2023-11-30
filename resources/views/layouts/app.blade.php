@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
-    <title>{{ $title ?? 'Aero Bootstrap4 Admin' }}</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css"/>
-    <link rel="stylesheet" href="assets/plugins/charts-c3/plugin.css"/>
+    <title>{{ $title }} Lara Social Admin Panel</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/charts-c3/plugin.css') }}"/>
 
-    <link rel="stylesheet" href="assets/plugins/morrisjs/morris.min.css"/>
+    <link rel="stylesheet" href="{{ asset('assets/plugins/morrisjs/morris.min.css') }}"/>
     <!-- Custom Css -->
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
 </head>
 
 <body class="theme-blush">
@@ -21,7 +21,7 @@
 <!-- Page Loader -->
 {{--<div class="page-loader-wrapper">
     <div class="loader">
-        <div class="m-t-30"><img class="zmdi-hc-spin" src="assets/images/loader.svg" width="48" height="48" alt="Aero"></div>
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="{{ asset('assets/images/loader.svg'}}" width="48" height="48" alt="Aero"></div>
         <p>Please wait...</p>
     </div>
 </div>--}}
@@ -52,15 +52,17 @@
 
 <!-- Jquery Core Js -->
 <script
-    src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
-<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+    src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
+<!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
+<!-- slimscroll, waves Scripts Plugin Js -->
 
-<script src="assets/bundles/jvectormap.bundle.js"></script> <!-- JVectorMap Plugin Js -->
-<script src="assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
-<script src="assets/bundles/c3.bundle.js"></script>
+<script src="{{ asset('assets/bundles/jvectormap.bundle.js') }}"></script> <!-- JVectorMap Plugin Js -->
+<script src="{{ asset('assets/bundles/sparkline.bundle.js') }}"></script> <!-- Sparkline Plugin Js -->
+<script src="{{ asset('assets/bundles/c3.bundle.js') }}"></script>
 
-<script src="assets/bundles/mainscripts.bundle.js"></script>
-<script src="assets/js/pages/index.js"></script>
+<script src="{{ asset('assets/bundles/mainscripts.bundle.js') }}"></script>
+<script src="{{ asset('assets/js/pages/index.js') }}"></script>
 </body>
 </html>
 
