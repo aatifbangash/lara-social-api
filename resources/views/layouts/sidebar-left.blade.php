@@ -1,7 +1,8 @@
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
         <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-        <a wire:navigate href="{{ route('home') }}"><img src="{{ asset('assets/images/logo.svg') }}" width="25" alt="Aero"><span
+        <a wire:navigate href="{{ route('home') }}"><img src="{{ asset('assets/images/logo.svg') }}" width="25"
+                                                         alt="Aero"><span
                 class="m-l-10">Aero</span></a>
     </div>
     <div class="menu">
@@ -11,16 +12,27 @@
                     <a class="image" href="profile.html"><img src="{{ asset('assets/images/profile_av.jpg') }}"
                                                               alt="User"></a>
                     <div class="detail">
-                        <h4>{{ ucwords(auth()->user()->name) }}</h4>
+                        <h4>{{ auth()->check() ? ucwords(auth()->user()->name) : 'Guest' }}</h4>
                         <small>Super Admin</small>
                     </div>
                 </div>
             </li>
-            <li class="active open"><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-            <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-male-female"></i><span>Users</span></a>
+            <li class="{{ request()->is('admin') ? 'active open' : '' }}">
+                <a wire:navigate href="{{ route('home') }}">
+                    <i class="zmdi zmdi-home"></i><span>Dashboard</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('admin/users/*') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="zmdi zmdi-male-female"></i><span>Users</span>
+                </a>
                 <ul class="ml-menu">
-                    <li><a wire:navigate href="{{ route('list-users') }}">List Users</a></li>
-                    <li><a wire:navigate href="{{ route('new-user') }}">New User</a></li>
+                    <li class="{{ request()->is('admin/users/list-users') ? 'active' : '' }}">
+                        <a wire:navigate href="{{ route('list-users') }}">List Users</a>
+                    </li>
+                    <li class="{{ request()->is('admin/users/new-user') ? 'active' : '' }}">
+                        <a wire:navigate href="{{ route('new-user') }}">New User</a>
+                    </li>
                 </ul>
             </li>
             <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>App</span></a>

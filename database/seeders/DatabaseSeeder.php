@@ -12,8 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
         $users = [
             [
                 'name' => 'admin',
@@ -30,5 +28,7 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $user) {
             \App\Models\User::factory()->create($user);
         }
+
+         \App\Models\User::factory(98)->create();
     }
 }

@@ -35,6 +35,11 @@
                                             <td colspan="4">Not data found.</td>
                                         </tr>
                                     @endif
+                                    <tr>
+                                        <td colspan="4">
+                                            {{ $users->links('livewire::bootstrap') }}
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

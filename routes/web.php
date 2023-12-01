@@ -6,7 +6,9 @@ use App\Livewire\Admin\Users\NewUser;
 use App\Livewire\Home;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Home::class)->name('home');
+Route::get('/', Home::class)
+    ->middleware('auth')
+    ->name('home');
 
 Route::prefix('admin')->group(function () {
     Route::get('/', Home::class)
