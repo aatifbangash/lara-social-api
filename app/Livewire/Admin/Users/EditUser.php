@@ -3,13 +3,12 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
-use Hash;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-class NewUser extends Component
+class EditUser extends Component
 {
+    public User $user;
 
     #[Rule('required|string')]
     public string $name;
@@ -17,25 +16,31 @@ class NewUser extends Component
     #[Rule('required|email|unique:users,email')]
     public string $email;
 
-    #[Rule('required')]
     public string $password;
 
-    public function save()
+    public function mount(User $user)
+    {
+        $this->user = $user;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->password = "*******";
+    }
+
+    public function update()
     {
         $this->validate();
 
-        User::create([
+        $this->user->update([
             'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password)
+            'email' => $this->email
         ]);
 
-        session()->flash('success', 'New user added successfully.');
+        session()->flash('success', 'User updated successfully.');
         $this->redirectRoute('list-users');
     }
 
     public function render()
     {
-        return view('livewire.admin.users.new-user');
+        return view('livewire.admin.users.edit-user');
     }
 }

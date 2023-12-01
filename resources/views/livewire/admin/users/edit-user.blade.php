@@ -1,6 +1,6 @@
 <section class="content">
     <div class="body_scroll">
-        <x-breadcrumb title="New User"/>
+        <x-breadcrumb title="Edit User"/>
 
         <div class="container-fluid">
             <!-- Basic Validation -->
@@ -9,10 +9,10 @@
                     <div class="card">
                         <x-alert-success />
                         <div class="header">
-                            <h2><strong>New</strong> User</h2>
+                            <h2><strong>Edit</strong> User</h2>
                         </div>
                         <div class="body">
-                            <form id="new_user_form" wire:submit.prevent="save">
+                            <form id="new_user_form" wire:submit.prevent="update">
                                 <div class="form-group form-float">
                                     <input
                                         type="text"
@@ -42,6 +42,7 @@
                                 </div>
                                 <div class="form-group form-float">
                                     <input
+                                        disabled
                                         type="password"
                                         class="form-control"
                                         placeholder="Password*"
@@ -57,7 +58,7 @@
                                 <button
                                     class="btn btn-raised btn-primary waves-effect"
                                     type="submit">
-                                    Add
+                                    Update
                                 </button>
                             </form>
                         </div>

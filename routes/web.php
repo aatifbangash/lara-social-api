@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Admin\Login;
+use App\Livewire\Admin\Users\EditUser;
 use App\Livewire\Admin\Users\ListUsers;
 use App\Livewire\Admin\Users\NewUser;
 use App\Livewire\Home;
@@ -25,5 +26,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/new-user', NewUser::class)
             ->middleware('auth')
             ->name('new-user');
+
+        Route::get('/edit-user/{user}', EditUser::class)
+            ->middleware('auth')
+            ->name('edit-user');
     });
 });

@@ -6,6 +6,7 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
+                        <x-alert-success />
                         <div class="header">
                             <h2><strong>List</strong> Users</h2>
                         </div>
@@ -18,16 +19,34 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Created At</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @if($users)
                                         @foreach($users as $user)
-                                            <tr>
+                                            <tr wire:key="{{ $user->id }}">
                                                 <th scope="row">{{ $user->id }}</th>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->created_at->diffForHumans() }}</td>
+                                                <td>
+                                                    <a
+                                                        class="btn btn-danger btn-icon float-right"
+                                                        type="button"
+                                                        wire:click="delete({{$user->id}})"
+                                                        wire:confirm="Are you sure?"
+                                                    >
+                                                        <i class="zmdi zmdi-delete"></i></i>
+                                                    </a>
+                                                    <a
+                                                        class="btn btn-secondary btn-icon float-right"
+                                                        wire:navigate
+                                                        href="{{ route('edit-user', $user->id) }}"
+                                                    >
+                                                        <i class="zmdi zmdi-edit"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @else

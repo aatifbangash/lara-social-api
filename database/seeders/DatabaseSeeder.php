@@ -25,10 +25,12 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
+        \App\Models\User::factory(98)->create();
+
         foreach ($users as $user) {
             \App\Models\User::factory()->create($user);
         }
 
-         \App\Models\User::factory(98)->create();
+
     }
 }
