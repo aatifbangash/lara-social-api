@@ -62,15 +62,18 @@ class UsersController extends Controller
      */
     public function updateUserProfile(ProfileRequest $request, int $userId): mixed
     {
-
-        if (!$userProfile = Profile::whereUserId($userId)->first())
+        if (!$userProfile = User::whereId($userId)->first())
             throw new RaiseException(
-                message: "User ($userId) profile not found",
+                message: "User ($userId) not found",
                 status: Response::HTTP_NOT_FOUND
             );
 
-        $userProfile->update($request->all());
+        $userProfile->profile()->updateOrCreate($request->all());
 
-        return ProfileResource::make($userProfile);
+        return response()->json([
+            'data' => [
+                'message' => 'User profile updated'
+            ]
+        ]);
     }
 }

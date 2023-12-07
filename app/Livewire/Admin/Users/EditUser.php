@@ -13,7 +13,7 @@ class EditUser extends Component
     #[Rule('required|string')]
     public string $name;
 
-    #[Rule('required|email|unique:users,email')]
+//    #[Rule('required|email|unique:users,email')]
     public string $email;
 
     public string $password;
@@ -31,8 +31,7 @@ class EditUser extends Component
         $this->validate();
 
         $this->user->update([
-            'name' => $this->name,
-            'email' => $this->email
+            'name' => $this->name
         ]);
 
         session()->flash('success', 'User updated successfully.');
